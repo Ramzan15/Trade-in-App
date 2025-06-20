@@ -1,0 +1,13 @@
+# Trade-in App  
+
+Приложение для оценки стоимости устройств при обмене (Trade-in).  
+
+## 🔧 Технологии  
+- **Backend**: Node.js + Express + MongoDB/PostgreSQL  
+- **Frontend**: React.js + Tailwind CSS  
+- **Деплой**: Docker + Nginx  
+
+## 🛠 Установка  
+1. Клонируйте репозиторий:  
+   ```bash
+   git clone https://github.com/ваш-логин/trade-in-app.git
