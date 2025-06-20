@@ -1,0 +1,84 @@
+import java.util.*;
+
+class TradeInDevice {
+    private String model;
+    private double estimatedValue;  // Оценочная стоимость при Trade-in
+
+    public TradeInDevice(String model, double estimatedValue) {
+        this.model = model;
+        this.estimatedValue = estimatedValue;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public double getEstimatedValue() {
+        return estimatedValue;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s (оценка: $%.2f)", model, estimatedValue);
+    }
+}
+
+public class TradeInSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+       
+        List<TradeInDevice> acceptedDevices = Arrays.asList(
+            new TradeInDevice("iPhone 11", 250.0),
+            new TradeInDevice("Samsung Galaxy S20", 200.0),
+            new TradeInDevice("Google Pixel 5", 180.0),
+            new TradeInDevice("OnePlus 8", 150.0),
+            new TradeInDevice("Xiaomi Redmi Note 10", 100.0)
+        );
+
+        
+        Map<String, Double> newDevices = new HashMap<>();
+        newDevices.put("iPhone 15", 999.0);
+        newDevices.put("Samsung Galaxy S23", 899.0);
+        newDevices.put("Google Pixel 8", 799.0);
+        newDevices.put("OnePlus 11", 699.0);
+        newDevices.put("Xiaomi 13", 599.0);
+
+        System.out.println("📱 Доступные устройства для Trade-in:");
+        acceptedDevices.forEach(System.out::println);
+
+        System.out.print("\nВведите модель вашего устройства: ");
+        String userDeviceModel = scanner.nextLine();
+
+      
+        Optional<TradeInDevice> userDevice = acceptedDevices.stream()
+            .filter(device -> device.getModel().equalsIgnoreCase(userDeviceModel))
+            .findFirst();
+
+        if (userDevice.isEmpty()) {
+            System.out.println("❌ Ваше устройство не принимается в Trade-in.");
+            return;
+        }
+
+        System.out.println("\n💵 Ваше устройство оценивается в: $" + userDevice.get().getEstimatedValue());
+
+        System.out.println("\n🆕 Доступные новые устройства:");
+        newDevices.forEach((model, price) -> 
+            System.out.printf("%s - $%.2f\n", model, price));
+
+        System.out.print("\nВведите модель нового устройства, которое хотите купить: ");
+        String newDeviceModel = scanner.nextLine();
+
+        if (!newDevices.containsKey(newDeviceModel)) {
+            System.out.println("❌ Устройство не найдено.");
+            return;
+        }
+
+        double newDevicePrice = newDevices.get(newDeviceModel);
+        double tradeInValue = userDevice.get().getEstimatedValue();
+        double finalPrice = newDevicePrice - tradeInValue;
+
+        System.out.printf("\n✅ Итоговая цена после Trade-in: $%.2f\n", finalPrice);
+        System.out.printf("(Скидка: $%.2f)\n", tradeInValue);
+    }
+}
