@@ -1,13 +1,49 @@
-# Trade-in App  
+import java.util.Scanner;
 
-Приложение для оценки стоимости устройств при обмене (Trade-in).  
+public class TradeInApp {
 
-## 🔧 Технологии  
-- **Backend**: Node.js + Express + MongoDB/PostgreSQL  
-- **Frontend**: React.js + Tailwind CSS  
-- **Деплой**: Docker + Nginx  
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-## 🛠 Установка  
-1. Клонируйте репозиторий:  
-   ```bash
-   git clone https://github.com/ваш-логин/trade-in-app.git
+        System.out.println("=== Trade-In Оценка стоимости ===");
+        System.out.print("Введите тип предмета (например, телефон, ноутбук): ");
+        String itemType = scanner.nextLine();
+
+        System.out.print("Введите базовую стоимость предмета (в рублях): ");
+        double basePrice = scanner.nextDouble();
+
+        System.out.print("Введите возраст предмета (в годах): ");
+        int age = scanner.nextInt();
+
+        System.out.print("Оцените состояние предмета (1-5, где 5 - идеальное): ");
+        int condition = scanner.nextInt();
+
+        double estimatedValue = estimateTradeInValue(basePrice, age, condition);
+
+        System.out.printf("Оценка стоимости Trade-in для %s: %.2f руб.\n", itemType, estimatedValue);
+
+        scanner.close();
+    }
+
+    /**
+     * Метод оценки стоимости Trade-in на основе базовой цены, возраста и состояния.
+     *
+     * @param basePrice  - исходная цена предмета
+     * @param age        - возраст в годах
+     * @param condition  - состояние (1-5)
+     * @return оценённая стоимость
+     */
+    public static double estimateTradeInValue(double basePrice, int age, int condition) {
+        // Коэффициент износа в зависимости от возраста
+        double ageDepreciation = Math.max(0, 1.0 - (age * 0.1)); // -10% за каждый год
+
+        // Коэффициент состояния (чем лучше состояние, тем выше стоимость)
+        double conditionMultiplier = 0.5 + (condition * 0.1); // 1=0.6, 5=1.0
+
+        // Минимальная стоимость (чтобы не ушло в 0)
+        double minValue = basePrice * 0.1;
+
+        double estimatedValue = basePrice * ageDepreciation * conditionMultiplier;
+        return Math.max(estimatedValue, minValue);
+    }
+}
