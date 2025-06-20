@@ -1,0 +1,32 @@
+trade-in-app/  
+├── backend/                # Backend (Node.js + Express)  
+│   ├── src/  
+│   │   ├── controllers/    # Логика обработки запросов  
+│   │   ├── models/         # Модели БД (Mongoose/SQL)  
+│   │   ├── routes/         # API эндпоинты  
+│   │   ├── config/         # Настройки (БД, JWT и т.д.)  
+│   │   └── app.js          # Основной файл сервера  
+│   ├── package.json  
+│   └── README.md  
+│  
+├── frontend/               # Frontend (React.js)  
+│   ├── src/  
+│   │   ├── components/     # UI-компоненты  
+│   │   ├── pages/          # Страницы (Trade-in форма, каталог)  
+│   │   ├── services/       # API-запросы к бэкенду  
+│   │   ├── styles/         # Глобальные стили  
+│   │   └── App.js          # Главный компонент  
+│   ├── package.json  
+│   └── README.md  
+│  
+├── database/               # Скрипты и схемы БД  
+│   ├── migrations/         # Миграции (если SQL)  
+│   └── models/             # Схемы данных  
+│  
+├── docs/                   # Документация  
+│   ├── API.md              # Описание API  
+│   └── SETUP.md            # Инструкция по установке  
+│  
+├── .gitignore              # Игнорируемые файлы  
+├── LICENSE                 # Лицензия (MIT/GPL)  
+└── README.md               # Описание проекта  
