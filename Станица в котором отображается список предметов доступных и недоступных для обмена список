@@ -1,0 +1,73 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class TradeInSystem {
+    
+    // Класс для представления предмета
+    static class Item {
+        String name;
+        int value; // стоимость в Trade-in
+        boolean available;
+        
+        public Item(String name, int value, boolean available) {
+            this.name = name;
+            this.value = value;
+            this.available = available;
+        }
+        
+        @Override
+        public String toString() {
+            return String.format("%s (Value: %d) - %s", 
+                name, value, available ? "Available" : "Unavailable");
+        }
+    }
+    
+    private Map<String, List<Item>> tradeInCategories;
+    
+    public TradeInSystem() {
+        tradeInCategories = new HashMap<>();
+        initializeItems();
+    }
+    
+    // Инициализация тестовых данных
+    private void initializeItems() {
+        List<Item> electronics = new ArrayList<>();
+        electronics.add(new Item("Smartphone X", 200, true));
+        electronics.add(new Item("Laptop Pro", 500, true));
+        electronics.add(new Item("Old Tablet", 50, false));
+        
+        List<Item> games = new ArrayList<>();
+        games.add(new Item("Game: Cosmic Adventure", 30, true));
+        games.add(new Item("Game: Racing Legends", 25, false));
+        games.add(new Item("Game: Fantasy World", 40, true));
+        
+        tradeInCategories.put("Electronics", electronics);
+        tradeInCategories.put("Games", games);
+    }
+    
+    // Вывод всех предметов с разделением на доступные/недоступные
+    public void displayTradeInItems() {
+        System.out.println("=== Trade-In Items ===");
+        
+        for (Map.Entry<String, List<Item>> entry : tradeInCategories.entrySet()) {
+            System.out.println("\nCategory: " + entry.getKey());
+            
+            System.out.println("\nAvailable Items:");
+            entry.getValue().stream()
+                .filter(item -> item.available)
+                .forEach(System.out::println);
+            
+            System.out.println("\nUnavailable Items:");
+            entry.getValue().stream()
+                .filter(item -> !item.available)
+                .forEach(System.out::println);
+        }
+    }
+    
+    public static void main(String[] args) {
+        TradeInSystem tradeSystem = new TradeInSystem();
+        tradeSystem.displayTradeInItems();
+    }
+}
