@@ -25,22 +25,15 @@ public class TradeInApp {
         scanner.close();
     }
 
-    /**
-     * Метод оценки стоимости Trade-in на основе базовой цены, возраста и состояния.
-     *
-     * @param basePrice  - исходная цена предмета
-     * @param age        - возраст в годах
-     * @param condition  - состояние (1-5)
-     * @return оценённая стоимость
-     */
+
     public static double estimateTradeInValue(double basePrice, int age, int condition) {
-        // Коэффициент износа в зависимости от возраста
+       
         double ageDepreciation = Math.max(0, 1.0 - (age * 0.1)); // -10% за каждый год
 
-        // Коэффициент состояния (чем лучше состояние, тем выше стоимость)
+        
         double conditionMultiplier = 0.5 + (condition * 0.1); // 1=0.6, 5=1.0
 
-        // Минимальная стоимость (чтобы не ушло в 0)
+       
         double minValue = basePrice * 0.1;
 
         double estimatedValue = basePrice * ageDepreciation * conditionMultiplier;
