@@ -1,0 +1,21 @@
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import java.util.Arrays;
+import java.util.List;
+
+@Controller
+public class TradeInController {
+
+    @GetMapping("/trade-in/non-tradable")
+    public String showNonTradableItems(Model model) {
+        List<NonTradableItem> items = Arrays.asList(
+            new NonTradableItem(1, "Эксклюзивный меч", "sword_exclusive.png", "Аккаунт-привязка"),
+            new NonTradableItem(2, "Подарочная коробка", "gift_box.png", "Особые условия"),
+            new NonTradableItem(3, "Легендарный артефакт", "legendary_artifact.png", "Ивентовая награда")
+        );
+        
+        model.addAttribute("items", items);
+        return "nonTradableItems";
+    }
+}
