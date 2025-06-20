@@ -1,0 +1,56 @@
+import java.time.LocalDate;
+
+public class TradeInDeal {
+    private String customerName;
+    private String oldProduct;
+    private double oldProductPrice;
+    private String newProduct;
+    private double newProductPrice;
+    private double discount;
+    private LocalDate dealDate;
+    private String additionalConditions;
+
+    public TradeInDeal(String customerName, String oldProduct, double oldProductPrice, 
+                      String newProduct, double newProductPrice, double discount, 
+                      String additionalConditions) {
+        this.customerName = customerName;
+        this.oldProduct = oldProduct;
+        this.oldProductPrice = oldProductPrice;
+        this.newProduct = newProduct;
+        this.newProductPrice = newProductPrice;
+        this.discount = discount;
+        this.dealDate = LocalDate.now();
+        this.additionalConditions = additionalConditions;
+    }
+
+    public double calculateFinalPrice() {
+        return newProductPrice - oldProductPrice - discount;
+    }
+
+    public void printDealDetails() {
+        System.out.println("Trade-In Deal Details:");
+        System.out.println("----------------------");
+        System.out.println("Customer: " + customerName);
+        System.out.println("Old Product: " + oldProduct + " (Price: $" + oldProductPrice + ")");
+        System.out.println("New Product: " + newProduct + " (Price: $" + newProductPrice + ")");
+        System.out.println("Discount Applied: $" + discount);
+        System.out.println("Final Price to Pay: $" + calculateFinalPrice());
+        System.out.println("Deal Date: " + dealDate);
+        System.out.println("Additional Conditions: " + additionalConditions);
+    }
+
+    public static void main(String[] args) {
+        // Пример создания сделки Trade-in
+        TradeInDeal deal = new TradeInDeal(
+            "John Doe",
+            "iPhone X",
+            300.0,
+            "iPhone 15",
+            999.0,
+            50.0,
+            "Old device must be in good working condition, no cracks on screen"
+        );
+        
+        deal.printDealDetails();
+    }
+}
